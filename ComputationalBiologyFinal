@@ -1,0 +1,35 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Correlation coefficients between ADHD symptoms and creativity measures
+correlation_data = {
+    'ADHD symptoms': [1, 0.22, -0.12, -0.09, -0.03, -0.36, 0.11, -0.06],
+    'Creative achievements': [0.22, 1, 0.15, 0.12, 0.19, -0.02, 0.21, 0.19],
+    'AUT fluency': [-0.12, 0.15, 1, 0.88, 0.05, -0.05, -0.07, 0.11],
+    'AUT flexibility': [-0.09, 0.12, 0.88, 1, 0.04, -0.02, -0.10, 0.19],
+    'AUT originality': [-0.03, 0.19, 0.05, 0.04, 1, 0.04, 0.10, 0.40],
+    'Problem usefulness': [-0.36, -0.02, -0.05, -0.02, 0.04, 1, 0.06, 0.14],
+    'Problem originality': [0.11, 0.21, -0.07, -0.10, 0.10, 0.06, 1, 0.01],
+    'Intrinsic motivation': [-0.06, 0.19, 0.11, 0.19, 0.40, 0.14, 0.01, 1]
+}
+
+# Create a DataFrame from the correlation data
+correlation_df = pd.DataFrame(correlation_data)
+
+# Compute the correlation matrix
+correlation_matrix = correlation_df.corr()
+
+# Plot heatmap
+plt.figure(figsize=(14,8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", annot_kws={"size": 8}, vmin=-1, vmax=1) 
+
+# Set plot title and labels
+plt.title('Correlation Matrix between ADHD Symptoms and Creativity Measures', fontsize=12)
+plt.xlabel('Creativity Measures', fontsize=10)
+plt.ylabel('ADHD Symptoms', fontsize=10)
+
+# Save the plot as an image (temporarily adjust figure size and pad the left side for saving)
+plt.savefig('heatmap.png', bbox_inches='tight', dpi=300, pad_inches=1.0) 
+# Show plot
+plt.show()
